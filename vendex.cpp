@@ -1,14 +1,9 @@
 #include <iostream>
-#include "inputparser.h"
+#include "inputparser/inputparser.h"
 
 int main(int argc, char **argv)
 {
     InputParser input(argc, argv);
-    // if (input.cmdOptionExists("-h"))
-    // {
-    //     // Do stuff
-    // }
-
-    std::cout << "OK" << std::endl;
+    input.printOptions();
     return 0;
 }

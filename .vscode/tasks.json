@@ -8,8 +8,9 @@
 			"args": [
 				"-g",
 				"${workspaceFolder}/*.cpp",
+				"${workspaceFolder}/inputparser/*.cpp",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}/debug/${fileBasenameNoExtension}"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

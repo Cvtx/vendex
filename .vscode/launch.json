@@ -9,12 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [
-                "-g",
-                "vendex.cpp",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
+            "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -29,10 +24,6 @@
             ],
             "preLaunchTask": "C/C++: g++ build vendex",
             "miDebuggerPath": "/usr/bin/gdb",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
         }
     ]
 }

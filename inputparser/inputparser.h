@@ -2,7 +2,12 @@
 #include <string>
 #include <algorithm>
 #include <cstdint>
+#include <iostream>
 
+/**
+ * @brief Parses command-line options and stores them.
+ * 
+ */
 class InputParser
 {
 public:
@@ -10,7 +15,8 @@ public:
     const std::string &getCmdOption(const std::string &option) const;
     bool cmdOptionExists(const std::string &option) const;
     const std::string &cmdOptionAtPosition(const uint32_t &position) const;
-    bool haveVerbalOption() const;
+    bool hasVerbalOption() const;
+    void printOptions() const;
 
 private:
     std::vector<std::string> tokens;
