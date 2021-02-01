@@ -1,4 +1,4 @@
-#include "inputparser.h"
+#include "../include/inputparser.h"
 
 /**
  * @brief Construct a new Input Parser:: Input Parser object

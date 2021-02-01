@@ -18,8 +18,7 @@ enum Option
  * @brief Mapping cli flags to option
  * 
  */
-const OptionsMap Options
-{
+const OptionsMap Options{
     {"v", Verbal},
-        {"f", FileName},
-}
+    {"f", FileName},
+};

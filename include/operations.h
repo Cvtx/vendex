@@ -2,7 +2,7 @@
 #include <map>
 #include <functional>
 #include <iostream>
-#include "arguments/arguments.h"
+#include "arguments.h"
 
 #define OperationsMap std::map<Operation, std::function<void(Arguments)>>
 

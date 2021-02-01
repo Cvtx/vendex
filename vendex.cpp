@@ -1,6 +1,6 @@
 #include <iostream>
-#include "inputparser/inputparser.h"
-#include "operations.h"
+#include "include/inputparser.h"
+#include "include/operations.h"
 
 int main(int argc, char **argv)
 {

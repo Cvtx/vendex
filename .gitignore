@@ -31,9 +31,8 @@
 *.out
 *.app
 
-# Build Dirs
-debug/
-release/
+# Binary Dir
+bin/
 
 #VS Code binaries
 .vscode/launch
