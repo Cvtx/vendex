@@ -7,8 +7,8 @@
 			"command": "/usr/bin/g++",
 			"args": [
 				"-g",
-				"${workspaceFolder}/*.cpp",
-				"${workspaceFolder}/inputparser/*.cpp",
+				"${workspaceFolder}\\**.cpp",
+				"${workspaceFolder}\\**.h",
 				"-o",
 				"${fileDirname}/debug/${fileBasenameNoExtension}"
 			],

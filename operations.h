@@ -1,6 +1,10 @@
 #include <string>
 #include <map>
 #include <functional>
+#include <iostream>
+#include "arguments/arguments.h"
+
+#define OperationsMap std::map<Operation, std::function<void(Arguments)>>
 
 /**
  * @brief Commands that program can perform
@@ -15,23 +19,37 @@ enum Operation
     ExportFile
 };
 
-/**
- * @brief Possible options
- * 
- */
-enum Option
+void CreateDatabase(const Arguments &args)
 {
-    Verbal,
-};
-
-void CreateDatabase(std::string s)
-{
+    std::cout << "test"; // just test
 }
 
 /**
- * @brief Mapping options to specific operations
+ * @brief Mapping operations to specific functions
  * 
  */
-const std::map<Operation, std::function<void(std::string)>> OperationsMapping{
+const OperationsMap Operations{
     {CreateDB, CreateDatabase},
 };
+
+/**
+ * @brief Finds mapped function to operation and executes it, passing the parameters
+ * 
+ * @param operations map of Operations
+ * @param operation operation to search
+ * @param args arguments to pass
+ */
+void performOperation(const OperationsMap &operations, const Operation &operation, const Arguments &args)
+{
+    OperationsMap::const_iterator iterator = operations.find(operation);
+    if (iterator == operations.end())
+    {
+        // error handling?
+        std::cout << "Unexsisting command passed." << std::endl;
+    }
+    else
+    {
+        /* executing function and passing arguments*/
+        iterator->second(args);
+    }
+}

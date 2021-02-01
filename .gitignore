@@ -34,3 +34,7 @@
 # Build Dirs
 debug/
 release/
+
+#VS Code binaries
+.vscode/launch
+.vscode/tasks
