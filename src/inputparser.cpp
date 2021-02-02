@@ -6,16 +6,18 @@
  * @param argc Amount of options
  * @param argv Options
  */
-InputParser::InputParser(int &argc, char **argv)
+InputParser::InputParser(const int &argc, char **argv, OperationsMap operations, OptionsMap options)
 {
     for (int i = 1; i < argc; i++)
     {
+        //OperationsMap::const_iterator operations_iterator = operations.find(argv[i]);
+        //OptionsMap::const_iterator options_iterator = options.find(argv[i]);
         this->tokens.push_back(std::string(argv[i]));
     }
 }
 
 /**
- * @brief Gives parameter of the option
+ * @brief Gives parameter of the option 
  * 
  * @param option
  * @return const std::string& parameter
@@ -51,13 +53,14 @@ bool InputParser::cmdOptionExists(const std::string &option) const
  */
 const std::string &InputParser::cmdOptionAtPosition(const uint32_t &position) const
 {
-    if (!positionInBound(position))
+    if (positionInBound(position))
     {
-        return emptyString();
+        /* Return token at position */
+        return this->tokens[position];
     }
 
-    /* Return token at position */
-    return this->tokens[position];
+    /* Else return empty string */
+    return emptyString();
 }
 
 /**

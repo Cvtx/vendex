@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <map>
 
@@ -11,7 +12,8 @@ enum Option
 {
     Verbal,
     FileName,
-    Directory
+    Directory,
+    Path,
 };
 
 /**
@@ -21,4 +23,5 @@ enum Option
 const OptionsMap Options{
     {"v", Verbal},
     {"f", FileName},
+    {"p", Path},
 };

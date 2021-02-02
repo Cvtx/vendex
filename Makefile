@@ -8,7 +8,6 @@ INCLUDE := include
 LIBRARIES   :=
 EXECUTABLE  := vendex
 
-
 all: $(BIN)/$(EXECUTABLE)
 
 run: clean all
