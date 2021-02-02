@@ -1,8 +1,8 @@
 #include "../include/operations.h"
 
-void performOperation(const OperationsMap &operations, const Operation &operation, const Arguments &args)
+void performOperation(const OperationsFunctionsMap &operations, const Operation &operation, const Arguments &args)
 {
-    OperationsMap::const_iterator iterator = operations.find(operation);
+    OperationsFunctionsMap::const_iterator iterator = operations.find(operation);
     if (iterator == operations.end())
     {
         // error handling?

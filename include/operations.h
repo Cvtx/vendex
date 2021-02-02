@@ -5,14 +5,16 @@
 #include <iostream>
 #include "arguments.h"
 
-#define OperationsMap std::map<Operation, std::function<void(Arguments)>>
+#define OperationsFunctionsMap std::map<Operation, std::function<void(Arguments)>>
+#define OperationsTokensMap std::map<std::string, Operation>
 
 /**
  * @brief Commands that program can perform
  * 
  */
-enum Operation
+enum class Operation
 {
+    Undefined,
     CreateDB,
     DeleteDB,
     AddFile,
@@ -24,7 +26,9 @@ enum Operation
  * @brief Mapping operations to specific functions
  * 
  */
-const OperationsMap Operations{
+const OperationsTokensMap Operations{
+    {"createdb", Operation::CreateDB}, // TODO: make create token rather that createdb createtag and so on
+    {"deletedb", Operation::DeleteDB},
 
 };
 
@@ -36,4 +40,4 @@ const OperationsMap Operations{
  * @param args arguments to pass
  */
 
-void performOperation(const OperationsMap &operations, const Operation &operation, const Arguments &args);
+void performOperation(const OperationsFunctionsMap &operations, const Operation &operation, const Arguments &args);

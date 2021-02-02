@@ -2,14 +2,15 @@
 #include <string>
 #include <map>
 
-#define OptionsMap std::map<std::string, Option>
+#define OptionsTokensMap std::map<std::string, Option>
 
 /**
  * @brief Possible options
  * 
  */
-enum Option
+enum class Option
 {
+    Undefined,
     Verbal,
     FileName,
     Directory,
@@ -20,8 +21,8 @@ enum Option
  * @brief Mapping cli flags to option
  * 
  */
-const OptionsMap Options{
-    {"v", Verbal},
-    {"f", FileName},
-    {"p", Path},
+const OptionsTokensMap Options{
+    {"v", Option::Verbal},
+    {"f", Option::FileName},
+    {"p", Option::Path},
 };

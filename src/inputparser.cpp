@@ -6,13 +6,48 @@
  * @param argc Amount of options
  * @param argv Options
  */
-InputParser::InputParser(const int &argc, char **argv, OperationsMap operations, OptionsMap options)
+InputParser::InputParser(const int &argc, char **argv, const OperationsTokensMap &operations, const OptionsTokensMap &options)
 {
+
+    /* Parsing arguments and converting them to Option and Operation types */
     for (int i = 1; i < argc; i++)
     {
-        //OperationsMap::const_iterator operations_iterator = operations.find(argv[i]);
-        //OptionsMap::const_iterator options_iterator = options.find(argv[i]);
+        parseOption(options, argv[i]);
+        parseOperation(operations, argv[i]);
+
         this->tokens.push_back(std::string(argv[i]));
+    }
+}
+
+Option InputParser::parseOption(const OptionsTokensMap &options, const std::string token)
+{
+    OptionsTokensMap::const_iterator options_iterator = options.find(token);
+
+    if (options_iterator == options.end())
+    {
+        return Option::Undefined;
+    }
+    else
+    {
+        /* Return option */
+        return options_iterator->second;
+    }
+}
+
+/* Code dublication, may do interface for this */
+Operation InputParser::parseOperation(const OperationsTokensMap &operations, const std::string &token)
+{
+
+    OperationsTokensMap::const_iterator operations_iterator = operations.find(token);
+    ;
+    if (operations_iterator == operations.end())
+    {
+        return Operation::Undefined;
+    }
+    else
+    {
+        /* Return operation */
+        return operations_iterator->second;
     }
 }
 
