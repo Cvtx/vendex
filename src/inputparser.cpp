@@ -10,9 +10,12 @@ InputParser::InputParser(const int &argc, char **argv, const OperationsTokensMap
 {
 
     /* Parsing arguments and converting them to Option and Operation types */
-    for (int i = 1; i < argc; i++)
+    for (int i = 0; i < argc; i++)
     {
-        parseOption(options, argv[i]);
+        Option option = parseOption(options, argv[i]);
+        if (option == Option::Undefined)
+        {
+        }
         parseOperation(operations, argv[i]);
 
         this->tokens.push_back(std::string(argv[i]));
@@ -139,15 +142,14 @@ bool InputParser::hasVerbalOption() const
  */
 void InputParser::printOptions() const
 {
-    int size = this->tokens.size();
-    if (size == 0)
+    if (this->tokens.size() == 0)
     {
         std::cout << "There is no passed options.";
     }
     else
     {
         std::cout << "Passed options are: ";
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < this->tokens.size(); i++)
         {
             std::cout << " " << this->tokens[i];
         }
