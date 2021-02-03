@@ -1,29 +1,17 @@
 #include "../include/token.h"
 
-/**
- * @brief Return value. 
- * It will work in all classes that inherit this class 
- * with public or protected specifier.
- * 
- * @return std::string 
- */
-std::string AToken::getValue()
+std::string Token::getValue()
 {
     return this->value;
 }
 
-int AToken::getName()
+TokenType Token::getType()
 {
-    return this->name;
+    return this->type;
 }
 
-TokenType OptionToken::getType()
-{
-    return TokenType::Option;
-}
-
-OptionToken::OptionToken(const std::string &value, TokenOption name)
+Token::Token(const std::string &value, TokenType type)
 {
     this->value = value;
-    this->name = name;
+    this->type = type;
 }
