@@ -9,6 +9,18 @@
 #include "operations.h"
 
 /**
+ * Terminology explained:
+ * Token is every string that is passed to executable e.g. in 
+ * $ ./vendex -v create tag 
+ * tokens will be -v, create, tag. 
+ * Also, very first token is always path to executable, which included by default.
+ * 
+ * Option is a token that starts with - (dash) e.g. -v.
+ * Operation is a token that don't start with - (dash) e.g. create.   
+ * 
+ */
+
+/**
  * @brief Parses command-line options and stores them.
  * 
  */

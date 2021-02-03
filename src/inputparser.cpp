@@ -3,25 +3,41 @@
 /**
  * @brief Construct a new Input Parser:: Input Parser object
  * 
- * @param argc Amount of options
- * @param argv Options
+ * @param argc amount of arguments 
+ * @param argv arguments
+ * @param operations map to match token with operation
+ * @param options map to match token with option
  */
 InputParser::InputParser(const int &argc, char **argv, const OperationsTokensMap &operations, const OptionsTokensMap &options)
 {
 
-    /* Parsing arguments and converting them to Option and Operation types */
-    for (int i = 0; i < argc; i++)
+    /* Parsing arguments and converting them to Option and Operation types, 
+    ignoring first argument which is path to executable */
+    for (int i = 1; i < argc; i++)
     {
-        Option option = parseOption(options, argv[i]);
-        if (option == Option::Undefined)
+        /* Comparing first character of token with dash */
+        if (argv[i][0] == OPTION_DASH)
         {
+            /* Parse option */
+            Option option = parseOption(options, argv[i]);
         }
-        parseOperation(operations, argv[i]);
+        else
+        {
+            /* Parse operation */
+            Operation operation = parseOperation(operations, argv[i]);
+        }
 
         this->tokens.push_back(std::string(argv[i]));
     }
 }
 
+/**
+ * @brief Parses single token and matches it with option
+ * 
+ * @param options map to match token with option
+ * @param token token to check
+ * @return Option 
+ */
 Option InputParser::parseOption(const OptionsTokensMap &options, const std::string token)
 {
     OptionsTokensMap::const_iterator options_iterator = options.find(token);
@@ -38,6 +54,13 @@ Option InputParser::parseOption(const OptionsTokensMap &options, const std::stri
 }
 
 /* Code dublication, may do interface for this */
+/**
+ * @brief Parses single token and matches it with operation
+ * 
+ * @param operations map to match token with operation
+ * @param token token to check
+ * @return Operation 
+ */
 Operation InputParser::parseOperation(const OperationsTokensMap &operations, const std::string &token)
 {
 
@@ -125,19 +148,7 @@ const std::string &InputParser::emptyString() const
 }
 
 /**
- * @brief Checks for verbal option
- * 
- * @return true if verbal option exist
- * @return false if verbal option don't exist
- */
-bool InputParser::hasVerbalOption() const
-{
-    const std::string verbal = std::string("-v");
-    return cmdOptionAtPosition(2) == verbal;
-}
-
-/**
- * @brief Prints all parsed options
+ * @brief Prints all parsed tokens
  * 
  */
 void InputParser::printOptions() const

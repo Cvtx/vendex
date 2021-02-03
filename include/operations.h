@@ -3,8 +3,8 @@
 #include <map>
 #include <functional>
 #include <iostream>
-#include "arguments.h"
 
+#define Arguments int
 #define OperationsFunctionsMap std::map<Operation, std::function<void(Arguments)>>
 #define OperationsTokensMap std::map<std::string, Operation>
 
