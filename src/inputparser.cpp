@@ -8,26 +8,35 @@
  * @param operations map to match token with operation
  * @param options map to match token with option
  */
-InputParser::InputParser(const int &argc, char **argv, const OperationsTokensMap &operations, const OptionsTokensMap &options)
+InputParser::InputParser(const int &argc, char **argv)
 {
 
-    /* Parsing arguments and converting them to Option and Operation types, 
-    ignoring first argument which is path to executable */
-    for (int i = 1; i < argc; i++)
-    {
-        /* Comparing first character of token with dash */
-        if (argv[i][0] == OPTION_DASH)
-        {
-            /* Parse option */
-            Option option = parseOption(options, argv[i]);
-        }
-        else
-        {
-            /* Parse operation */
-            Operation operation = parseOperation(operations, argv[i]);
-        }
+    /* Parsing arguments ignoring first argument which is path to executable */
+    int i = 1;
 
-        this->tokens.push_back(std::string(argv[i]));
+    /* Parsing options */
+    while ((i < argc) && (argv[i][0] == OPTION_DASH))
+    {
+
+        Token token(argv[i], TokenType::Option);
+        this->tokens.push_back(token);
+        i++;
+    }
+
+    /* Parsing operation */
+    if (i < argc)
+    {
+        Token token(argv[i], TokenType::Operation);
+        this->tokens.push_back(token);
+        i++;
+    }
+
+    /* Parsing parameters */
+    while (i < argc)
+    {
+        Token token(argv[i], TokenType::Parameter);
+        this->tokens.push_back(token);
+        i++;
     }
 }
 
@@ -83,15 +92,16 @@ Operation InputParser::parseOperation(const OperationsTokensMap &operations, con
  * @param option
  * @return const std::string& parameter
  */
-const std::string &InputParser::getCmdOption(const std::string &option) const
+Token InputParser::getCmdOption(const std::string &option) const
 {
-    std::vector<std::string>::const_iterator itr;
-    itr = std::find(this->tokens.begin(), this->tokens.end(), option);
-    if (itr != this->tokens.end() && ++itr != this->tokens.end())
-    {
-        return *itr;
-    }
-    return emptyString();
+    // std::vector<Token>::iterator itr;
+    // itr = std::find(this->tokens.begin(), this->tokens.end(), option);
+    // if (itr != this->tokens.end() && ++itr != this->tokens.end())
+    // {
+    //     return *itr;
+    // }
+    Token token("", TokenType::Option);
+    return token;
 }
 
 /**
@@ -103,7 +113,8 @@ const std::string &InputParser::getCmdOption(const std::string &option) const
  */
 bool InputParser::cmdOptionExists(const std::string &option) const
 {
-    return std::find(this->tokens.begin(), this->tokens.end(), option) != this->tokens.end();
+    return false;
+    //return std::find(this->tokens.begin(), this->tokens.end(), option) != this->tokens.end();
 }
 
 /**
@@ -112,7 +123,7 @@ bool InputParser::cmdOptionExists(const std::string &option) const
  * @param position 
  * @return const std::string& option or empty string if position is invalid
  */
-const std::string &InputParser::cmdOptionAtPosition(const uint32_t &position) const
+Token InputParser::cmdOptionAtPosition(const uint32_t &position) const
 {
     if (positionInBound(position))
     {
@@ -121,7 +132,7 @@ const std::string &InputParser::cmdOptionAtPosition(const uint32_t &position) co
     }
 
     /* Else return empty string */
-    return emptyString();
+    return Token("", TokenType::Option);
 }
 
 /**
@@ -162,7 +173,7 @@ void InputParser::printOptions() const
         std::cout << "Passed options are: ";
         for (int i = 0; i < this->tokens.size(); i++)
         {
-            std::cout << " " << this->tokens[i];
+            std::cout << " " << ((this->tokens[i]).getValue());
         }
     }
     std::cout << std::endl;
