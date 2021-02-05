@@ -8,6 +8,7 @@
 #include "token.h"
 #include "options.h"
 #include "operations.h"
+#include "parameters.h"
 
 /**
  * Terminology explained:
@@ -28,17 +29,34 @@
 class InputParser
 {
 public:
+    InputParser();
     InputParser(const int &argc, char **argv);
+
+    void input(const int &argc, char **argv);
+    void parse();
+    void reset();
+
     Token getCmdOption(const std::string &option) const;
     bool cmdOptionExists(const std::string &option) const;
     Token cmdOptionAtPosition(const uint32_t &position) const;
-    bool hasVerbalOption() const;
+
     void printOptions() const;
+    void printParameters() const;
 
 private:
-    std::vector<Token> tokens;
+    std::vector<OptionToken> options;
+    OperationToken operation = OperationToken(Operation::Undefined);
+    std::vector<ParameterToken> parameters;
+
+    void parseOptions(const OptionsTokensMap &map);
+    void parseOperation(const OperationsTokensMap &map);
+    void parseParameters(const ParametersTokensMap &map);
+
+    std::vector<ParameterToken> getParameters();
+    OperationToken getOperationToken();
+    Operation getOperation();
+    std::vector<OptionToken> getOptions();
+
     const std::string &emptyString() const;
     bool positionInBound(const uint32_t &position) const;
-    Operation parseOperation(const OperationsTokensMap &operations, const std::string &token);
-    Option parseOption(const OptionsTokensMap &options, const std::string token);
 };

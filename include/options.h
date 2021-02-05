@@ -3,7 +3,7 @@
 #include <map>
 
 #define OptionsTokensMap std::map<std::string, Option>
-#define OPTION_DASH '-' /* Option dash */ // const char ?
+#define OPTION_DASH '-'
 
 /**
  * @brief Possible options
@@ -26,9 +26,4 @@ const OptionsTokensMap Options{
     {"v", Option::Verbal},
     {"f", Option::FileName},
     {"p", Option::Path},
-};
-
-enum class Parameter
-{
-
 };
